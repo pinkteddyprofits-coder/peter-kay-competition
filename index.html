@@ -1,0 +1,580 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Win Peter Kay Tickets</title>
+
+<style>
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #050006;
+  color: white;
+  text-align: center;
+}
+
+#home {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#home img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.flash, .bottom { pointer-events: none; }
+
+.flash {
+  position: absolute;
+  top: 16%;
+  right: 3%;
+  width: 34vw;
+  height: 34vw;
+  min-width: 210px;
+  min-height: 210px;
+  max-width: 420px;
+  max-height: 420px;
+  border-radius: 50%;
+  background: black;
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: clamp(24px, 5vw, 62px);
+  line-height: 0.95;
+  border: 4px solid rgba(255,160,230,0.8);
+  box-shadow: 0 0 30px rgba(255,80,220,0.8);
+  text-shadow: 0 0 10px white, 0 0 20px red;
+  -webkit-text-stroke: 1px white;
+  animation: flash 1.3s infinite;
+}
+
+@keyframes flash {
+  0%, 40%, 100% { opacity: 0; transform: scale(0.95); }
+  50%, 90% { opacity: 1; transform: scale(1); }
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 35px 20px 20px;
+  font-weight: bold;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+}
+
+.page {
+  display: none;
+  min-height: 100vh;
+  padding: 25px 18px;
+  background: radial-gradient(circle at top, rgba(120,0,120,0.45), transparent 35%), #080008;
+}
+
+.card {
+  max-width: 540px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 0 35px rgba(255,0,120,0.25);
+}
+
+h1, h2 {
+  color: #ffdf55;
+  margin-top: 0;
+}
+
+.intro, .note {
+  color: #ddd;
+  font-size: 14px;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 5px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 13px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+}
+
+input, select {
+  background: white;
+  color: black;
+}
+
+button {
+  margin-top: 14px;
+  background: #d60000;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: grey;
+  cursor: not-allowed;
+}
+
+.secondary-btn {
+  background: #222;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+#countdown {
+  font-size: 110px;
+  font-weight: 900;
+  color: #ffdf55;
+  text-shadow: 0 0 20px rgba(255,223,85,0.8);
+  margin: 20px 0;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+
+.unlock-box {
+  display: none;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.6s ease;
+}
+
+.glow-btn {
+  background: linear-gradient(90deg, #ff0000, #ff6a00);
+  box-shadow: 0 0 25px rgba(255,0,0,0.65);
+  animation: glow 1.2s infinite alternate;
+}
+
+@keyframes glow {
+  from { transform: scale(1); box-shadow: 0 0 15px rgba(255,0,0,0.5); }
+  to { transform: scale(1.04); box-shadow: 0 0 35px rgba(255,223,85,0.9); }
+}
+
+.logo-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.logo-card, .logo-grid img {
+  background: white;
+  color: #111;
+  border-radius: 10px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+#wheelContainer {
+  position: relative;
+  width: 310px;
+  height: 310px;
+  margin: 25px auto;
+}
+
+#wheel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 8px solid white;
+  background: conic-gradient(
+  #111 0deg 36deg,        /* black (lose) */
+  #e00000 36deg 72deg,    /* red */
+  #111 72deg 108deg,      /* black (lose) */
+  #ffcc00 108deg 144deg,  /* gold */
+  #111 144deg 180deg,     /* black (lose) */
+  #e00000 180deg 216deg,  /* red */
+  #111 216deg 252deg,     /* black (lose) */
+  #111 252deg 288deg,   /* black (lose) */
+  #ffcc00 288deg 324deg,  /* ⭐ WINNING SEGMENT */
+  #e00000 324deg 360deg   /* red */
+  );
+  transition: transform 3.4s cubic-bezier(.15,.8,.25,1);
+  box-shadow: 0 0 35px rgba(255,255,255,0.25);
+  overflow: hidden;
+}
+
+.wheel-label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 88px;
+  height: 24px;
+  margin-left: -44px;
+  margin-top: -12px;
+  font-size: 8px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 0 0 4px black, 0 0 6px black;
+  line-height: 1.05;
+  text-align: center;
+  transform-origin: 44px 12px;
+}
+
+.pointer {
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-top: 36px solid #ffdf55;
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  filter: drop-shadow(0 0 8px rgba(255,223,85,0.9));
+}
+
+#result {
+  margin-top: 18px;
+  min-height: 55px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.confetti {
+  position: fixed;
+  top: -10px;
+  width: 8px;
+  height: 12px;
+  z-index: 9999;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(720deg); }
+}
+
+.winner-glow {
+  box-shadow: 0 0 35px gold, 0 0 70px #ffdf55, 0 0 110px red !important;
+}
+
+.win-flash {
+  animation: winFlash 0.8s ease-in-out 3;
+}
+
+@keyframes winFlash {
+  0%,100% { background: rgba(255,255,255,0.08); }
+  50% { background: rgba(255,215,0,0.35); }
+}
+</style>
+</head>
+
+<body>
+
+<div id="home" onclick="showForm()">
+<div class="top-banner">
+  FREE ENTRY  WIN PETER KAY TICKETS
+</div>
+  <img src="poster.png" alt="Poster">
+  <div class="flash">CLICK<br>TO ENTER<br>COMPETITION</div>
+</div>
+
+<div id="formPage" class="page">
+  <div class="card">
+    <h1>Enter Competition</h1>
+    <p class="intro">Complete your details below. Winners will be notified by post.</p>
+
+    <form name="competition" id="competitionForm" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="competition">
+
+      <label>Full Name</label>
+      <input type="text" name="Full Name" required>
+
+      <label>Email Address</label>
+      <input type="email" name="Email" required>
+
+      <label>Postcode</label>
+      <input type="text" id="postcode" name="Postcode" placeholder="Enter postcode" required>
+
+      <button type="button" class="secondary-btn" onclick="findAddress()">Find Address</button>
+
+      <label>Address</label>
+      <select id="address" name="Address" required disabled>
+        <option value="">Enter postcode and tap Find Address</option>
+      </select>
+
+      <label>Preferred Venue</label>
+      <select name="Preferred Venue" required>
+        <option value="">Select preferred venue</option>
+        <option>Newcastle Utilita Arena</option>
+        <option>Nottingham Motorpoint Arena</option>
+        <option>Glasgow OVO Hydro</option>
+        <option>Dublin 3Arena</option>
+        <option>Birmingham Utilita Arena</option>
+        <option>Belfast SSE Arena</option>
+        <option>Liverpool M&S Bank Arena</option>
+        <option>Sheffield Utilita Arena</option>
+        <option>Leeds First Direct Arena</option>
+        <option>London The O2</option>
+        <option>Manchester AO Arena</option>
+      </select>
+
+      <button type="submit">Submit Entry</button>
+      <p class="note">Your entry will be recorded securely. Winners will be notified by post.</p>
+    </form>
+  </div>
+</div>
+
+<div id="successPage" class="page">
+  <div class="card">
+    <h2>Thank you for entering!</h2>
+    <p>Your entry has been received.</p>
+    <p><strong>Winners will be notified by post.</strong></p>
+
+    <div id="countdown">5</div>
+    <div id="unlock" class="unlock-box"></div>
+
+    <h2 style="margin-top:25px;">Supporting Cancer Charities</h2>
+
+    <div class="logo-grid">
+  <img src="logos/children.png">
+  <img src="logos/teenage.png">
+  <img src="logos/kidney.png">
+  <img src="logos/blood.png">
+  <img src="logos/bowel.png">
+  <img src="logos/prostate.png">
+  <img src="logos/dkms.png">
+  <img src="logos/ovarian.png">
+  <img src="logos/pancreatic.png">
+  <img src="logos/nolan.png">
+  <img src="logos/brain.png">
+  <img src="logos/breast.png">
+</div>
+  </div>
+</div>
+
+<div id="gamePage" class="page">
+  <div class="card">
+    <h1>BL Residents Bonus Game</h1>
+    <p class="intro">Enjoy your bonus prize reveal.</p>
+
+    <div id="wheelContainer">
+      <div class="pointer"></div>
+
+      <div id="wheel">
+        <div class="wheel-label" style="transform: rotate(18deg) translateY(-105px) rotate(-18deg);">LOSE</div>
+        <div class="wheel-label" style="transform: rotate(54deg) translateY(-105px) rotate(-54deg);">MR B ÜBER<br>VOUCHER</div>
+        <div class="wheel-label" style="transform: rotate(90deg) translateY(-105px) rotate(-90deg);">LOSE</div>
+        <div class="wheel-label" style="transform: rotate(126deg) translateY(-105px) rotate(-126deg);">14" GARLIC<br>BREAD</div>
+        <div class="wheel-label" style="transform: rotate(162deg) translateY(-105px) rotate(-162deg);">TRY AGAIN</div>
+        <div class="wheel-label" style="transform: rotate(198deg) translateY(-105px) rotate(-198deg);">VIP<br>TICKETS</div>
+        <div class="wheel-label" style="transform: rotate(234deg) translateY(-105px) rotate(-234deg);">TRY AGAIN</div>
+        <div class="wheel-label" style="transform: rotate(270deg) translateY(-105px) rotate(-270deg);">LAUGHTER<br>BOOK</div>
+        <div class="wheel-label" style="transform: rotate(306deg) translateY(-105px) rotate(-306deg);">PETER KAY<br>SCRATCHCARD</div>
+        <div class="wheel-label" style="transform: rotate(342deg) translateY(-105px) rotate(-342deg);">TRY AGAIN</div>
+      </div>
+    </div>
+
+    <button id="spinBtn" class="glow-btn" onclick="spin()">SPIN</button>
+    <div id="result"></div>
+  </div>
+</div>
+
+<script>
+function showForm() {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("formPage").style.display = "block";
+  window.scrollTo(0, 0);
+}
+
+function normalisePostcode(value) {
+  return value.replace(/\s+/g, "").toUpperCase();
+}
+
+function findAddress() {
+  const postcodeBox = document.getElementById("postcode");
+  const dropdown = document.getElementById("address");
+  const clean = normalisePostcode(postcodeBox.value);
+
+  if (clean !== "BL22SX") {
+    dropdown.disabled = true;
+    dropdown.innerHTML = '<option value="">Please enter BL2 2SX</option>';
+    alert("Please enter postcode BL2 2SX.");
+    return;
+  }
+
+  dropdown.disabled = false;
+  dropdown.innerHTML = '<option value="">Select your address</option>';
+
+  const numbers = ["2","2A","4","6","8","10","12","14","16","18","20","22","24","26","28","30","32","34","36","38","40"];
+
+  numbers.forEach(function(num) {
+    const address = num + " Shireburn Avenue, Bolton, BL2 2SX";
+    const option = document.createElement("option");
+    option.value = address;
+    option.textContent = address;
+    dropdown.appendChild(option);
+  });
+}
+
+function encodeFormData(formData) {
+  return new URLSearchParams(formData).toString();
+}
+
+document.getElementById("competitionForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+
+  document.getElementById("formPage").style.display = "none";
+  document.getElementById("successPage").style.display = "block";
+  window.scrollTo(0, 0);
+  startCountdown();
+
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: encodeFormData(formData)
+  }).catch(function() {
+    console.log("Demo mode submission");
+  });
+});
+
+function startCountdown() {
+  let n = 5;
+  const el = document.getElementById("countdown");
+  const unlock = document.getElementById("unlock");
+
+  el.style.display = "block";
+  el.style.opacity = "1";
+  el.style.transform = "scale(1)";
+  el.innerText = "5";
+
+  unlock.style.display = "none";
+  unlock.style.opacity = "0";
+  unlock.style.transform = "scale(0.9)";
+
+  const interval = setInterval(() => {
+    n--;
+    el.innerText = n;
+
+    if (n === 0) {
+      clearInterval(interval);
+      el.style.opacity = "0";
+
+      setTimeout(() => {
+        el.innerText = "Checking eligibility...";
+        el.style.fontSize = "28px";
+        el.style.opacity = "1";
+        el.style.animation = "none";
+
+        setTimeout(() => {
+          el.style.display = "none";
+          unlock.style.display = "block";
+
+          unlock.innerHTML = `
+            <h2>🎉 BL Residents Bonus Game Unlocked!</h2>
+            <p>This exclusive bonus game is available to residents within BL postcode areas only.</p>
+            <button class="glow-btn" onclick="startGame()">CLICK TO PLAY</button>
+          `;
+
+          confetti(45);
+
+          setTimeout(() => {
+            unlock.style.opacity = "1";
+            unlock.style.transform = "scale(1)";
+          }, 50);
+        }, 1400);
+      }, 600);
+    }
+  }, 1000);
+}
+
+function startGame() {
+  document.getElementById("successPage").style.display = "none";
+  document.getElementById("gamePage").style.display = "block";
+  window.scrollTo(0, 0);
+}
+
+let spins = 0;
+let currentRotation = 0;
+
+function spin() {
+  const wheel = document.getElementById("wheel");
+  const result = document.getElementById("result");
+  const btn = document.getElementById("spinBtn");
+
+  if (spins >= 3) return;
+
+  btn.disabled = true;
+  result.innerText = "Spinning...";
+
+  spins++;
+
+  let targetIndex;
+
+  if (spins === 1) targetIndex = 0;
+  else if (spins === 2) targetIndex = 2;
+  else targetIndex = 8;
+const segmentAngle = 360 / 10;
+const targetAngle = 360 - (targetIndex * segmentAngle) - (segmentAngle / 2);
+
+currentRotation += 1800 + ((targetAngle - (currentRotation % 360) + 360) % 360);
+wheel.style.transform = "rotate(" + currentRotation + "deg)";
+
+  setTimeout(() => {
+    if (spins === 1) {
+      result.innerText = "😬 So close! You have 2 attempts remaining.";
+      btn.disabled = false;
+    } else if (spins === 2) {
+      result.innerText = "😮 Nearly there! Final attempt unlocked.";
+      btn.disabled = false;
+    } else {
+      result.innerText = "🎉 WINNER: PETER KAY SCRATCHCARD 🎉";
+      wheel.classList.add("winner-glow");
+      document.querySelector("#gamePage .card").classList.add("win-flash");
+      confetti(120);
+      btn.innerText = "GAME OVER";
+      btn.disabled = true;
+      btn.style.background = "grey";
+      wheel.style.opacity = "0.85";
+    }
+  }, 3400);
+}
+
+function confetti(amount) {
+  for (let i = 0; i < amount; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.background = ["#ff0000","#ffdf55","#ffffff","#ff66cc"][Math.floor(Math.random()*4)];
+    c.style.animationDuration = (Math.random()*2 + 2) + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 4000);
+  }
+}
+</script>
+
+</body>
+</html>
