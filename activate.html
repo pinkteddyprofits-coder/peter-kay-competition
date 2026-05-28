@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ticket Activation</title>
+
+<style>
+body{
+    margin:0;
+    background:#050006;
+    color:white;
+    font-family:Arial,sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    text-align:center;
+    padding:20px;
+}
+
+.card{
+    max-width:500px;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:24px;
+    padding:30px;
+    box-shadow:0 0 35px rgba(255,0,120,0.25);
+}
+
+h1{
+    color:#ffdd55;
+    margin-top:0;
+}
+
+input{
+    width:100%;
+    padding:16px;
+    border-radius:12px;
+    border:none;
+    margin-top:15px;
+    font-size:18px;
+    text-align:center;
+}
+
+button{
+    margin-top:18px;
+    padding:14px 24px;
+    border:none;
+    border-radius:12px;
+    background:#ff0055;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+}
+
+#secret{
+    display:none;
+    margin-top:25px;
+    font-size:24px;
+    line-height:1.5;
+    color:#00ff99;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Ticket Activation</h1>
+
+    <p>Enter your activation code from the letter.</p>
+
+    <input type="text" id="codeBox" placeholder="Activation code">
+
+    <button onclick="checkCode()">ACTIVATE</button>
+
+    <div id="secret">
+        🎉 Surprise! 🎉<br><br>
+        This entire competition was made as a birthday gift.<br><br>
+        You are REALLY going to see Peter Kay!
+    </div>
+</div>
+
+<script>
+function checkCode() {
+
+    const code =
+    document.getElementById("codeBox")
+    .value
+    .trim()
+    .toUpperCase();
+
+    if(code === "GARLIC BREAD BL2"){
+        document.getElementById("secret").style.display = "block";
+    } else {
+        alert("Invalid activation code.");
+    }
+}
+</script>
+
+</body>
+</html>
